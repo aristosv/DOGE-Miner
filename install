@@ -22,7 +22,7 @@ echo upgrading
 apt -y upgrade > /dev/null 2>&1
 
 echo installing prerequisites
-apt install -y wget git build-essential cmake libuv1-dev libssl-dev libhwloc-dev > /dev/null 2>&1
+apt install -y git build-essential cmake libuv1-dev libssl-dev libhwloc-dev > /dev/null 2>&1
 
 echo cloning repository
 git clone https://github.com/xmrig/xmrig.git > /dev/null 2>&1
