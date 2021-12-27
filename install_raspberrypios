@@ -1,0 +1,63 @@
+#!/bin/bash
+
+echo ========================================================================
+echo Before continuing make sure you have your DOGE wallet address at hand
+echo ========================================================================
+read -p "press enter to continue"
+
+echo CPU or GPU Mining: ; read mining_type ; export mining_type
+echo DOGE Wallet Address: ; read wallet_address ; export wallet_address
+
+if [ $mining_type = CPU ]
+then
+  mining_pool=rx.unmineable.com:3333
+else
+  mining_pool=etchash.unmineable.com:3333
+fi
+
+echo updating
+sudo apt update > /dev/null 2>&1
+
+echo upgrading
+sudo apt -y upgrade > /dev/null 2>&1
+
+echo installing prerequisites
+sudo apt install -y git build-essential cmake libuv1-dev libssl-dev libhwloc-dev > /dev/null 2>&1
+
+echo cloning repository
+git clone https://github.com/xmrig/xmrig.git > /dev/null 2>&1
+
+echo creating directories
+cd xmrig ; mkdir build ; cd build
+
+echo building binary
+cmake .. > /dev/null 2>&1 ; make
+
+echo downloading configuration
+wget https://raw.githubusercontent.com/xmrig/xmrig/master/src/config.json > /dev/null 2>&1
+
+echo modifying configuration
+sed -i "s/donate.v2.xmrig.com:3333/$mining_pool/g" $HOME/xmrig/build/config.json
+sed -i "s/YOUR_WALLET_ADDRESS/DOGE:$wallet_address.$HOSTNAME/g" $HOME/xmrig/build/config.json
+
+echo creating service
+sudo bash -c "cat >> /etc/systemd/system/miner.service" << EOL
+[Unit]
+Description=miner
+After=network.target
+
+[Service]
+ExecStart=/bin/bash -c "while true ; do $HOME/xmrig/build/xmrig ; done"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+echo starting service
+sudo systemctl daemon-reload
+sudo systemctl start miner.service
+sudo systemctl enable miner.service > /dev/null 2>&1
+
+echo monitoring service
+journalctl -f -u miner.service
