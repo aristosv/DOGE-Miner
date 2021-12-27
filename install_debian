@@ -37,7 +37,7 @@ echo downloading configuration
 wget https://raw.githubusercontent.com/xmrig/xmrig/master/src/config.json > /dev/null 2>&1
 
 echo modifying configuration
-sed -i "s/donate.v2.xmrig.com:3333/$mining_pool/g" /$USER/xmrig/build/config.json
+sed -i "s/donate.v2.xmrig.com:3333/$mining_pool/g" $HOME/xmrig/build/config.json
 sed -i "s/YOUR_WALLET_ADDRESS/DOGE:$wallet_address.$HOSTNAME/g" /$USER/xmrig/build/config.json
 
 echo creating service
@@ -47,7 +47,7 @@ Description=miner
 After=network.target
 
 [Service]
-ExecStart=/bin/bash -c "while true ; do /$USER/xmrig/build/xmrig ; done"
+ExecStart=/bin/bash -c "while true ; do $HOME/xmrig/build/xmrig ; done"
 Restart=always
 
 [Install]
