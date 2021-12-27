@@ -1,10 +1,15 @@
 # DOGE Miner
 
-This will use [xmrig](https://github.com/xmrig/xmrig) to mine DOGE. Tested on Debian 11.
+This will use [xmrig](https://github.com/xmrig/xmrig) to mine DOGE. Tested on Debian 11 and Raspberry Pi OS.
 
-# Install
+# Debian Install
 ```bash
 bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/DOGE-Miner/main/install_debian)
+```
+
+# Raspberry Pi OS Install
+```bash
+bash <(wget --no-check-certificate -qO- https://raw.githubusercontent.com/aristosv/DOGE-Miner/main/install_raspberrypios)
 ```
 
 After the setup go to https://unmineable.com/ and paste your wallet address to view additional information.
