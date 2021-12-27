@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo ========================================================================
+echo Before continuing make sure you have your DOGE wallet address at hand
+echo ========================================================================
+read -p "press enter to continue"
+
 echo CPU or GPU Mining: ; read mining_type ; export mining_type
 echo DOGE Wallet Address: ; read wallet_address ; export wallet_address
 
