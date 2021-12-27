@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo DOGE Wallet Address: ; read wallet_address ; export wallet_address
+echo CPU or GPU Mining: ; read mining_type ; export mining_type
+
 echo updating
 apt update > /dev/null 2>&1
 
@@ -23,7 +26,7 @@ wget https://raw.githubusercontent.com/xmrig/xmrig/master/src/config.json > /dev
 
 echo modifying configuration
 sed -i "s/donate.v2.xmrig.com:3333/rx.unmineable.com:3333/g" /$USER/xmrig/build/config.json
-sed -i "s/YOUR_WALLET_ADDRESS/DOGE:DPWf45ip13sLt1a4JnVJnzBSMeketqbvAz.$HOSTNAME/g" /$USER/xmrig/build/config.json
+sed -i "s/YOUR_WALLET_ADDRESS/DOGE:$wallet_address.$HOSTNAME/g" /$USER/xmrig/build/config.json
 
 echo creating service
 cat <<EOL >> /etc/systemd/system/miner.service
