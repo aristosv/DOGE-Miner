@@ -1,7 +1,14 @@
 #!/bin/bash
 
-echo DOGE Wallet Address: ; read wallet_address ; export wallet_address
 echo CPU or GPU Mining: ; read mining_type ; export mining_type
+echo DOGE Wallet Address: ; read wallet_address ; export wallet_address
+
+if [ $mining_type = CPU ]
+then
+  mining_pool=rx.unmineable.com:3333
+else
+  mining_pool=etchash.unmineable.com:3333
+fi
 
 echo updating
 apt update > /dev/null 2>&1
