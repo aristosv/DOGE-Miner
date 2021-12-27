@@ -38,7 +38,7 @@ wget https://raw.githubusercontent.com/xmrig/xmrig/master/src/config.json > /dev
 
 echo modifying configuration
 sed -i "s/donate.v2.xmrig.com:3333/$mining_pool/g" $HOME/xmrig/build/config.json
-sed -i "s/YOUR_WALLET_ADDRESS/DOGE:$wallet_address.$HOSTNAME/g" /$USER/xmrig/build/config.json
+sed -i "s/YOUR_WALLET_ADDRESS/DOGE:$wallet_address.$HOSTNAME/g" $HOME/xmrig/build/config.json
 
 echo creating service
 cat <<EOL >> /etc/systemd/system/miner.service
