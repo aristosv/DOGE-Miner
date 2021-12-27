@@ -1,0 +1,2 @@
+# DOGE-Miner
+Mine DOGE
