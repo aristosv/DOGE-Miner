@@ -5,15 +5,7 @@ echo Before continuing make sure you have your DOGE wallet address at hand
 echo ========================================================================
 read -p "press enter to continue"
 
-echo CPU or GPU Mining: ; read mining_type ; export mining_type
 echo DOGE Wallet Address: ; read wallet_address ; export wallet_address
-
-if [ $mining_type = CPU ]
-then
-  mining_pool=rx.unmineable.com:3333
-else
-  mining_pool=etchash.unmineable.com:3333
-fi
 
 echo updating
 sudo apt update > /dev/null 2>&1
@@ -37,7 +29,7 @@ echo downloading configuration
 wget https://raw.githubusercontent.com/xmrig/xmrig/master/src/config.json > /dev/null 2>&1
 
 echo modifying configuration
-sed -i "s/donate.v2.xmrig.com:3333/$mining_pool/g" $HOME/xmrig/build/config.json
+sed -i "s/donate.v2.xmrig.com:3333/rx.unmineable.com:3333/g" $HOME/xmrig/build/config.json
 sed -i "s/YOUR_WALLET_ADDRESS/DOGE:$wallet_address.$HOSTNAME/g" $HOME/xmrig/build/config.json
 
 echo creating service
