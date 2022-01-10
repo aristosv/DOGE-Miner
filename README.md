@@ -1,6 +1,6 @@
 # DOGE Miner
 
-This will use [xmrig](https://github.com/xmrig/xmrig) to mine DOGE. Tested on Debian 11 and Raspberry Pi OS.
+This will use [xmrig](https://github.com/xmrig/xmrig) and your GPU to mine DOGE. Tested on Debian 11 and Raspberry Pi OS.
 
 Don't expect profit, especially if you're using the Raspberry Pi. What you can do is mine the coins, and hope their value increases.
 
